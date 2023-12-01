@@ -11,7 +11,7 @@ let playbackRate = 3.5;
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       mediaRecorder = new MediaRecorder(stream);
       audioChunks = [];
-      document.getElementById('recordingIndicator').style.display = 'block';
+      document.getElementById('recordingIndicator').style.visibility = 'visible';
 
       mediaRecorder.ondataavailable = e => {
         audioChunks.push(e.data);
@@ -30,7 +30,7 @@ let playbackRate = 3.5;
         const audio = new Audio(URL.createObjectURL(lastRecordedBlob));
         audio.playbackRate = playbackRate; // 設置播放速度為三倍
         audio.play();
-        document.getElementById('recordingIndicator').style.display = 'none';
+        document.getElementById('recordingIndicator').style.visibility = 'hidden';
         document.getElementById('replayRecord').disabled = false;
         document.getElementById('startRecord').disabled = false;
         document.getElementById('playbackSpeed').disabled = false;

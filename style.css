@@ -27,7 +27,7 @@
 }
 
 #recordingIndicator{
-    display: none; 
+    visibility:hidden;
     color: red;
     margin-top: 20px;
     font-weight: 600;
@@ -40,6 +40,9 @@
     }
     .container, .container-md, .container-sm {
         max-width: 912px;
+    }
+    h3{
+        font-size: 2rem ;
     }
   }
 
