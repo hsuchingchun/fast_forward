@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    justify-content: center; /* 水平置中 */
+    align-items: center; /* 垂直置中 */
+    height: 100vh; /* 設定父容器高度為視窗高度，讓子元素在垂直方向上置中 */
+  }
+.btn {
+    font-size: 32px; /* 設定根元素字體大小，可根據需要調整 */
+    margin: 8px;
+}
+
+
+
+
