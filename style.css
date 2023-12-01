@@ -9,6 +9,11 @@
     margin: 8px;
 }
 
-
+@media only screen and (max-width: 1024px) {
+    .btn {
+      font-size: 2.5rem; /* 使用相對單位 rem */
+      padding: 0.5rem 1rem; /* 調整按鈕內邊距 */
+    }
+  }
 
 
