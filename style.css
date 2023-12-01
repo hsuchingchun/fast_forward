@@ -1,6 +1,8 @@
 .container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center; /* 水平置中 */
+    align-content: center;
     align-items: center; /* 垂直置中 */
     height: 100vh; /* 設定父容器高度為視窗高度，讓子元素在垂直方向上置中 */
   }
@@ -9,10 +11,35 @@
     margin: 8px;
 }
 
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+.record-center{
+    width: 80%;
+    display: flex;
+    justify-content: center; /* 水平置中 */
+    align-items: center; /* 垂直置中 */
+    text-align: center; /* 若內容為文本，也可以使用 text-align 進行水平置中 */
+    animation: blink 1s infinite; /* 使用動畫效果 */
+}
+
+#recordingIndicator{
+    display: none; 
+    color: red;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
 @media only screen and (max-width: 1024px) {
     .btn {
-      font-size: 2.5rem; /* 使用相對單位 rem */
+      font-size: 3rem; /* 使用相對單位 rem */
       padding: 0.5rem 1rem; /* 調整按鈕內邊距 */
+    }
+    .container, .container-md, .container-sm {
+        max-width: 912px;
     }
   }
 
