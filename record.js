@@ -1,7 +1,7 @@
 let audioChunks;
 let mediaRecorder;
 let lastRecordedBlob;
-let playbackRate = 3;
+let playbackRate = 3.5;
 
     // 獲取麥克風許可權並開始錄音
     document.getElementById('startRecord').addEventListener('click', async () => {
