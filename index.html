@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>快進盒</title>
+</head>
+<body>
+  <button id="startRecord">開始錄音</button>
+  <button id="stopRecord" disabled>停止錄音</button>
+  <button id="replayRecord" disabled>重播錄音</button>
+  <div id="recordingIndicator" style="display: none;">錄音中...</div>
+
+  <script>
+    let audioChunks;
+    let mediaRecorder;
+    let lastRecordedBlob;
+
+    // 獲取麥克風許可權並開始錄音
+    document.getElementById('startRecord').addEventListener('click', async () => {
+      const startButton = document.getElementById('startRecord');
+      startButton.disabled = true;
+
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      audioChunks = [];
+      document.getElementById('recordingIndicator').style.display = 'block';
+
+      mediaRecorder.ondataavailable = e => {
+        audioChunks.push(e.data);
+      };
+
+      mediaRecorder.start();
+      document.getElementById('stopRecord').disabled = false;
+    });
+
+    // 停止錄音
+    document.getElementById('stopRecord').addEventListener('click', () => {
+      mediaRecorder.stop();
+      mediaRecorder.onstop = () => {
+        lastRecordedBlob = new Blob(audioChunks, { 'type': 'audio/wav' });
+        const audio = new Audio(URL.createObjectURL(lastRecordedBlob));
+        audio.playbackRate = 3.5; // 設置播放速度為三倍
+        audio.play();
+        document.getElementById('recordingIndicator').style.display = 'none';
+        document.getElementById('replayRecord').disabled = false;
+        document.getElementById('startRecord').disabled = false;
+      };
+      document.getElementById('stopRecord').disabled = true;
+    });
+
+    // 重播錄音
+    document.getElementById('replayRecord').addEventListener('click', () => {
+      if (lastRecordedBlob) {
+        const audio = new Audio(URL.createObjectURL(lastRecordedBlob));
+        audio.playbackRate = 3.5;
+        audio.play();
+      }
+    });
+  </script>
+</body>
